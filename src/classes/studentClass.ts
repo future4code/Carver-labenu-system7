@@ -1,21 +1,21 @@
-export abstract class User {
+export class User {
   protected id: string;
   protected name: string;
   protected email: string;
-  protected birth_date: string;
+  protected birthDate: string;
   protected team_id: string;
 
   constructor(
     id: string,
     name: string,
     email: string,
-    birth_date: string,
+    birthDate: string,
     team_id: string
   ) {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.birth_date = birth_date;
+    this.birthDate = birthDate;
     this.team_id = team_id;
   }
 
@@ -29,7 +29,7 @@ export abstract class User {
     return this.email;
   }
   public getBirthDate(): string {
-    return this.birth_date;
+    return this.birthDate;
   }
   public getTeamId(): string {
     return this.team_id;
@@ -40,11 +40,11 @@ export class Student extends User {
     id: string,
     name: string,
     email: string,
-    birth_date: string,
+    birthDate: string,
     team_id: string,
     protected hobby: string[]
   ) {
-    super(id, name, email, birth_date, team_id);
+    super(id, name, email, birthDate, team_id);
   }
 
   public getHobby(): string[] {
