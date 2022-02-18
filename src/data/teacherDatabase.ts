@@ -15,4 +15,5 @@ export class teacherDataBase {
         .from('Docente')
         return result
     }
+    
 }
