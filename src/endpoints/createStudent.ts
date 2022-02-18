@@ -1,39 +1,35 @@
 import { Request, Response } from 'express';
+import { Student } from '../classes/studentClass';
 import { StudentDataBase } from '../data/studentDataBase';
-import { Student } from '../classes/studentclass';
 
 export const createStudent = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  let errorCode = 400;
   try {
-    const { name, email, birth_date, team_id, hobbies } = req.body;
+    let { nome, email, data_nasc, turma_id, hobbies } = req.body;
     const id = Date.now().toString();
+    data_nasc = data_nasc.split('/').reverse().join('-');
 
-    if (!name || !email || !birth_date || !team_id || !hobbies) {
+    if (!nome || !email || !data_nasc || !turma_id || !hobbies) {
       res.statusCode = 422;
       throw new Error('Preencha todos os campos');
     }
 
-    const studentDB = new StudentDataBase();
-
-    const newStudent = new Student(
+    const newStudent = new StudentDataBase();
+    const studentData: Student = new Student(
       id,
-      name,
+      nome,
       email,
-      birth_date,
-      team_id,
+      data_nasc,
+      turma_id,
       hobbies
     );
-
-    await studentDB.create(newStudent);
+    await newStudent.createNewStudent(studentData);
 
     res.status(200).send('Novo estudante criado com sucesso');
   } catch (error: any) {
-    if (res.statusCode === 200) {
-      res.status(500).send('Algum erro aconteceu, tente novamente!');
-    } else {
-      res.status(res.statusCode).send(error.message);
-    }
+    res.status(errorCode).send(error.message || error.sqlMessage);
   }
 };

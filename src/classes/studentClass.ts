@@ -1,53 +1,53 @@
-export abstract class User {
+export class User {
   protected id: string;
-  protected name: string;
+  protected nome: string;
   protected email: string;
-  protected birth_date: string;
-  protected team_id: string;
+  protected data_nasc: string;
+  protected turma_id: string;
 
   constructor(
     id: string,
-    name: string,
+    nome: string,
     email: string,
-    birth_date: string,
-    team_id: string
+    data_nasc: string,
+    turma_id: string
   ) {
     this.id = id;
-    this.name = name;
+    this.nome = nome;
     this.email = email;
-    this.birth_date = birth_date;
-    this.team_id = team_id;
+    this.data_nasc = data_nasc;
+    this.turma_id = turma_id;
   }
 
   public getId(): string {
     return this.id;
   }
-  public getName(): string {
-    return this.name;
+  public getNome(): string {
+    return this.nome;
   }
   public getEmail(): string {
     return this.email;
   }
-  public getBirthDate(): string {
-    return this.birth_date;
+  public getDataNasc(): string {
+    return this.data_nasc;
   }
-  public getTeamId(): string {
-    return this.team_id;
+  public getTurmaId(): string {
+    return this.turma_id;
   }
 }
 export class Student extends User {
   constructor(
     id: string,
-    name: string,
+    nome: string,
     email: string,
-    birth_date: string,
-    team_id: string,
-    protected hobby: string[]
+    data_nasc: string,
+    turma_id: string,
+    protected hobbies: string[]
   ) {
-    super(id, name, email, birth_date, team_id);
+    super(id, nome, email, data_nasc, turma_id);
   }
 
   public getHobby(): string[] {
-    return this.hobby;
+    return this.hobbies;
   }
 }
