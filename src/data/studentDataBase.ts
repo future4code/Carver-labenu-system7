@@ -1,46 +1,57 @@
-// import { Student } from '../classes/studentClass';
+import { Student } from '../classes/studentClass';
+import { connection } from './connection';
 
-// export class StudentDataBase {
-//   async create(student: Student) {
-//     await StudentDataBase.connection('labenusystem_students').insert({
-//       id: student.getId(),
-//       name: student.getName(),
-//       email: student.getEmail(),
-//       birth_date: student.getBirthDate(),
-//       team_id: student.getTeamId(),
-//     });
+export class StudentDataBase {
+  async createNewStudent(student: Student) {
+    await connection.raw(`
+      INSERT INTO Estudante (id, name, email, birthDate, team_id)
+      VALUES
+          ("${student.getId()}", "${student.getNome()}", "${student.getEmail()}", 
+           "${student.getDataNasc()}", "${student.getTurmaId()}");
+  `);
 
-//     const hobby = student.getHobby();
+    const hobbies = student.getHobby();
 
-//     const hobbyId = (): string => {
-//       return Date.now().toString();
-//     };
-//     const studentHobbyId = (): string => {
-//       return Date.now().toString();
-//     };
+    const hobbyId = (): string => {
+      return Date.now().toString();
+    };
 
-//     for (let hob of hobby) {
-//       const id = hobbyId();
+    const studentHobbyId = (): string => {
+      return Date.now().toString();
+    };
 
-//       await StudentDataBase.connection('labenusystem_Hobby').insert({
-//         id: id,
-//         name: hob,
-//       });
+    for (let hobby of hobbies) {
+      await connection.raw(`
+          INSERT INTO Hobby (id, name)
+          VALUES
+              ("${hobbyId()}", "${hobby}");
+      `);
 
-//       await StudentDataBase.connection('labenusystem_studentHobby').insert({
-//         id: studentHobbyId(),
-//         student_id: student.getId(),
-//         hobby_id: id,
-//       });
+      await connection.raw(`
+          INSERT INTO Estudante_Hobby (id, student_id, hobby_id)
+          VALUES
+              ("${studentHobbyId()}", "${student.getId()}", "${hobbyId()}");
+      `);
+    }
+  }
 
-//       return student;
-//     }
-//   }
-//   async changeStudentFromClass(id: string, team_id: string) {
-//     await StudentDataBase.connection('labenusystem_students')
-//       .update({
-//         team_id: team_id,
-//       })
-//       .where('id', '=', id);
-//   }
-// }
+  async getStudentByName(name: string): Promise<Student[]> {
+    const results: Student[] = await connection.raw(`
+      SELECT * FROM Estudante WHERE name LIKE "%${name}%";
+  `);
+    return results;
+  }
+
+  async getStudentsId(): Promise<any> {
+    const results: Student[] = await connection.raw(`
+        SELECT id FROM Estudante;
+    `);
+    return results;
+  }
+
+  async changeStudentFromTeam(id: string, team_id: string) {
+    await connection.raw(`
+        UPDATE Estudante SET team_id = "${team_id}" WHERE id = "${id}";
+    `);
+  }
+}
