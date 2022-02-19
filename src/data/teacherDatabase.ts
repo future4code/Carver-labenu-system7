@@ -16,4 +16,31 @@ export class teacherDataBase {
         return result
     }
     
+    async changeTClass(checkId: string, newId:string): Promise<void> {
+        try{
+            const result = await connection()
+            .select('*')
+            .from('Docente')
+
+            result.map(async (res:any):Promise<void> =>{
+                await connection.raw(`
+                UPDATE  Docente SET class_id = '${newId}' WHERE id = '${checkId}'
+                `)
+            } )
+
+            
+
+        } catch (error:any){
+            return error.message
+        }
+    }
+    
+}
+
+const checkId = async (id:string): Promise<any> =>{
+    const checkId = await connection()
+    .select('id')
+    .from('Docente')
+    .where('id', id)
+        return checkId[0].id
 }
