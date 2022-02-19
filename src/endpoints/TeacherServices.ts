@@ -23,6 +23,7 @@ export const changeTClass = async (req:Request, res:Response): Promise<void> =>{
         const teacherData = new teacherDataBase()
         const {checkId, newId} = req.body
         await teacherData.changeTClass(checkId, newId)
+        
         if(!checkId || !newId){
             errorCode = 401
             res.status(errorCode).send('Preencha com um id existente')

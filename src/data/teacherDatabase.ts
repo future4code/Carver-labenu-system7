@@ -23,9 +23,12 @@ export class teacherDataBase {
             .from('Docente')
 
             result.map(async (res:any):Promise<void> =>{
-                await connection.raw(`
-                UPDATE  Docente SET class_id = '${newId}' WHERE id = '${checkId}'
-                `)
+                 if(checkId === res.id){
+                    await connection.raw(`
+                    UPDATE  Docente SET class_id = '${newId}' WHERE id = '${checkId}'
+                    `)
+                 }
+               
             } )
 
             
