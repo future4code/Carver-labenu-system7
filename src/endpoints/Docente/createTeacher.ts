@@ -1,5 +1,5 @@
 import {Request, Response} from 'express'
-import { Teacher } from '../classes/teacherClass'
+import { Teacher } from '../../classes/teacherClass'
 
 let errorCode = 0
 export const createTeacher = async (req:Request, res:Response): Promise<void> =>{

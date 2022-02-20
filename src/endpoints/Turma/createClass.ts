@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { connection } from "../data/connection"
-import { Turma } from "../classes/class"
+import { connection } from "../../data/Connection/connection"
+import { Turma } from "../../classes/classClass"
 
 export const createClass = async (req: Request, res: Response) => {
     let errorCode = 400

@@ -1,11 +1,11 @@
 import { app } from './app';
-import { changeStudentTeam } from './endpoints/changeStudentTeam';
-import { createClass } from './endpoints/createClass';
-import { createStudent } from './endpoints/createStudent';
-import { getStudent } from './endpoints/getStudent';
-import {createTeacher} from './endpoints/createTeacher'
-import { getActiveClass } from './endpoints/activeClasses';
-import { changeClass } from './endpoints/changeClass';
+import { changeStudentTeam } from './endpoints/Estudantes/changeStudentTeam';
+import { createClass } from './endpoints/Turma/createClass';
+import { createStudent } from './endpoints/Estudantes/createStudent';
+import { getStudent } from './endpoints/Estudantes/getStudent';
+import {createTeacher} from './endpoints/Docente/createTeacher'
+import { getActiveClass } from './endpoints/Turma/activeClasses';
+import { changeClass } from './endpoints/Turma/changeClass';
 
 
 app.get('/student', getStudent);

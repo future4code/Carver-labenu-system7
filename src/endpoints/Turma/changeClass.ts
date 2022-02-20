@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { classDataBase } from "../data/classDataBase";
+import { ClassDataBase } from "../../data/classDataBase";
 
 
 export const changeClass = async (req: Request, resp: Response):Promise<void> => {
@@ -14,7 +14,7 @@ export const changeClass = async (req: Request, resp: Response):Promise<void> =>
         }
 
        
-        const classData = new classDataBase()
+        const classData = new ClassDataBase()
         await classData.chance_module(id, module)
 
 

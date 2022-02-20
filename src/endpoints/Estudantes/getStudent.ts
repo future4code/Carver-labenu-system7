@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Student } from '../classes/studentClass';
-import { StudentDataBase } from '../data/studentDataBase';
+import { Student } from '../../classes/studentClass';
+import { StudentDataBase } from '../../data/studentDataBase';
 
 export const getStudent = async (
   req: Request,
