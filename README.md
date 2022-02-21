@@ -31,3 +31,23 @@ As funcionalidades básicas são:
 → Adicionar docente na turma;
 
 → Pegar a idade de algum estudante a partir do id
+
+##
+
+## Alunos Participantes:
+
+   - Leandro Gino Maiero
+   - Luis Gustavo Rodrigues de Paula
+   - Igor Medeiros Freitas 
+
+##
+
+## Tecnologias aplicadas:
+
+- Typescript
+- Nodet.js
+- Knex
+- MySQL
+- Express
+- Dotenv
+- Cors   
