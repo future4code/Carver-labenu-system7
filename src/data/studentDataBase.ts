@@ -1,5 +1,5 @@
 import { Student } from '../classes/studentClass';
-import { connection } from './connection';
+import { connection } from './Connection/connection';
 
 export class StudentDataBase {
   async createNewStudent(student: Student) {

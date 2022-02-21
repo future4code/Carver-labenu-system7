@@ -1,4 +1,4 @@
-import { connection } from "./connection"
+import { connection } from "./Connection/connection"
 import { Teacher } from "../classes/teacherClass"
 
 export class teacherDataBase {
